@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import Notes from "./pages/Notes";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/customers" element={<Customers />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/notes" element={<Notes/>}/>
             </Routes>
           </div>
         </div>
