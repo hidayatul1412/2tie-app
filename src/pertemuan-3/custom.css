@@ -1,0 +1,49 @@
+/* Styling untuk keseluruhan halaman - Tema Alam */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f8e9; /* Hijau pucat yang lembut */
+    color: #33691e; /* Hijau tua */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container utama */
+.card {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px; /* Sudut membulat dan organik */
+    border: 1px solid #dcedc8;
+    box-shadow: 0 8px 24px rgba(51, 105, 30, 0.08); /* Bayangan hijau sangat halus */
+}
+
+/* Header utama */
+h1 {
+    color: #558b2f; /* Hijau daun */
+    text-align: center;
+}
+
+/* Paragraf */
+p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #4e5d4e;
+}
+
+/* Garis pemisah */
+hr {
+    border: none;
+    height: 2px;
+    background: #aed581; /* Hijau pastel cerah */
+    margin: 15px 0;
+}
+
+/* Greeting */
+small {
+    display: block;
+    font-style: italic;
+    text-align: center;
+    color: #8d6e63; /* Cokelat batang pohon */
+    margin-top: 5px;
+}
