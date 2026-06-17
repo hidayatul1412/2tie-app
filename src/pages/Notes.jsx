@@ -1,15 +1,14 @@
 import { AiFillDelete } from "react-icons/ai"; 
 import { notesAPI } from "../services/notesAPI";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import AlertBox from "../components/AlertBox";
 import GenericTable from "../components/GenericTable";
-import EmptyState from "../components/EmptyState";
 import LoadingSpinner from "../components/LoadingSpinner";
+import EmptyState from "../components/EmptyState";
 
 export default function Notes() {
-  const [loading, setLoading] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -55,26 +54,6 @@ export default function Notes() {
       setLoading(false);
     }
   };
-  // Handle untuk aksi hapus data
-  const handleDelete = async (id) => {
-    const konfirmasi = confirm("Yakin ingin menghapus catatan ini?");
-    if (!konfirmasi) return;
-
-    try {
-      setLoading(true);
-      setError("");
-      setSuccess("");
-
-      await notesAPI.deleteNote(id);
-
-      // Refresh data
-      loadNotes();
-    } catch (err) {
-      setError(`Terjadi kesalahan: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Load data saat pertama di-render
   useEffect(() => {
@@ -95,6 +74,27 @@ export default function Notes() {
       setLoading(false);
     }
   };
+
+  // Handle untuk aksi hapus data
+    const handleDelete = async (id) => {
+        const konfirmasi = confirm("Yakin ingin menghapus catatan ini?")
+        if (!konfirmasi) return
+
+        try {
+            setLoading(true)
+            setError("")
+            setSuccess("")
+
+            await notesAPI.deleteNote(id)
+
+            // Refresh data
+            loadNotes()
+        } catch (err) {
+            setError(`Terjadi kesalahan: ${err.message}`)
+        } finally {
+            setLoading(false)
+        }
+    }
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -146,13 +146,11 @@ export default function Notes() {
                         focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed
                         transition-all duration-200 shadow-lg"
           >
-            Tambah Catatan
-            {loading ? "Mohon ditunggu ...." : "Tambah Data"}
+            {loading ? "Mohon Tunggu..." : "Tambah Data"}
           </button>
         </form>
-
-        {/* Notes Table */}
       </div>
+
       {/* Notes Table */}
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden mt-10">
         <div className="px-6 py-4 ">
@@ -160,6 +158,7 @@ export default function Notes() {
             Daftar Catatan ({notes.length})
           </h3>
         </div>
+
         {loading && <LoadingSpinner text="Memuat catatan..." />}
 
         {!loading && notes.length === 0 && !error && (
@@ -172,7 +171,7 @@ export default function Notes() {
 
         {!loading && notes.length > 0 ? (
           <GenericTable
-            columns={["#", "Judul", "Isi Catatan", "Aksi"]}
+            columns={["#", "Judul", "Isi Catatan","Aksi"]}
             data={notes}
             renderRow={(note, index) => (
               <>
@@ -188,15 +187,15 @@ export default function Notes() {
                   <div className="truncate text-gray-600">{note.content}</div>
                 </td>
                 <td className="px-6 py-4 max-w-xs">
-                  <div className="truncate text-gray-600">
-                    <button
-                      onClick={() => handleDelete(note.id)}
-                      disabled={loading}
-                    >
-                      <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />
-                    </button>
-                  </div>
-                </td>
+	              <div className="truncate text-gray-600">
+	                  <button
+	                      onClick={() => handleDelete(note.id)}
+	                      disabled={loading}
+	                  >
+	                      <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />
+	                  </button>
+	              </div>
+	          </td>
               </>
             )}
           />
